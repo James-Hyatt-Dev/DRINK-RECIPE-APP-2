@@ -77,19 +77,18 @@ class CLI
     end
 
     def recipe_display(new_recipe)
-        puts "All the wonderful information you requested for your drink, #{new_recipe.name}"
+        puts "All the wonderful information you requested for your #{new_recipe.name} drink"
         puts ""
-        puts "The recommended glass to use is the #{new_recipe.glass}"
+        puts "The recommended glass to use for your #{new_recipe.name} is the  #{new_recipe.glass}"
         puts ""
-        puts "The ingredients you will need are:"
-        puts "#{new_recipe.ingredients}"
-        puts ""
-        puts "In the same order of the ingredients, the amounts of each are:"
-        puts "#{new_recipe.amounts}"
+        puts "The ingredients and the amounts are:"
+        amounts_of_ingredients = new_recipe.ingredients.zip(new_recipe.amounts)
+        amounts_of_ingredients.each do |ing, amt|
+            puts "#{ing}: #{amt}"
+        end
         puts ""
         puts "Now the best part! Time to make your drink!"
         puts ""
-        binding.pry
         puts "#{new_recipe.instructions}"
         self.main_menu
     end
