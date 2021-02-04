@@ -29,3 +29,8 @@ level one deep 2nd api
                     5. brandy 1..10
                     6. gin 1..10
                         return users recipes for drinks
+
+#new_drink[input-1].name
+        # def new_pass
+        #     new_drink[input-1].name  
+        # end

@@ -90,6 +90,7 @@ class CLI
         puts "Now the best part! Time to make your drink!"
         puts ""
         puts "#{new_recipe.instructions}"
+        binding.pry
         self.main_menu
     end
 
@@ -138,14 +139,17 @@ class CLI
         final_display_of_drinks(new_drink)
     end
 
-    def final_display_of_drinks(new_drink)
-        puts ""
+    def final_display_of_drinks(new_drink) 
+        puts ""                                                                                                
         puts "Thank you, here is the list of the drinks from your selection."
         puts ""
         puts "Please make a selection from the following list by typing in the coralating number."
         new_drink.each_with_index{|j,i| puts "#{i +1}. #{j.name}"}
         input = gets.strip
-        input = Drink.all_drinks        
+        
+        input = input.to_i
+        input = new_drink[input-1].name  #Drink.all_drinks   
+             
         new_recipe = Api.get_drink_by_name(input)       
         self.recipe_display(new_recipe)
     end
