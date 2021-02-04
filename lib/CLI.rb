@@ -115,7 +115,7 @@ class CLI
         user_input_liquor(input)
     end
 
-    ef user_input_liquor(input)
+    def user_input_liquor(input)
         liquor_list = {"1" => "Brandy", "2" => "Gin", "3" => "Rum", "4" => "Tequila", "5" => "Vodka", "6" => "Whisky"}
         if input == "1"
             new_drink = Api.get_drink_by_liquor(liquor_list["1"])
@@ -145,42 +145,30 @@ class CLI
         puts "Please make a selection from the following list by typing in the coralating number."
         new_drink.each_with_index{|j,i| puts "#{i +1}. #{j.name}"}
         input = gets.strip
-        binding.pry
-        # self.recipe_display(input)
-
-        input = Drink.all_drinks[]
-        new_recipe = Api.get_drink_by_name(input    
-            self.recipe_display(new_recipe  
-        end
+        input = Drink.all_drinks        
+        new_recipe = Api.get_drink_by_name(input)       
+        self.recipe_display(new_recipe)
+    end
 
 ########################################
 
-def main_menu
-    puts ""
-        puts "If you wish to look up another recipe, please enter 1"
+    def main_menu
         puts ""
-        puts "If you wish to exit the application, please enter 2"
-        input = gets.strip
-        if input == "1"
-            self.ask_for_drink_or_input
-        elsif input == "2"
-            self.exit_application
-        else
-            puts "Invalid Input"
-            self.main.menu
+            puts "If you wish to look up another recipe, please enter 1"
+            puts ""
+            puts "If you wish to exit the application, please enter 2"
+            input = gets.strip
+            if input == "1"
+                self.ask_for_drink_or_input
+            elsif input == "2"
+                self.exit_application
+            else
+                puts "Invalid Input"
+                self.main.menu
+            end
         end
-    end
 
     def exit_application
         abort("Thank you for using our Drink Recipe Application! Have A Great Day!")
     end
-end
-
-
-
-
-
-
-
-
 end
