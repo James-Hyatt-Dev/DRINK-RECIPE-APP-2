@@ -1,7 +1,5 @@
 require 'pry'
 require 'httparty'
-require 'json'
-
 
 require_relative('../lib/API')
 require_relative('../lib/CLI')

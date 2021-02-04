@@ -2,16 +2,20 @@ class CLI
 
     def welcome
         puts ""
-        puts "Welcome to our CLI drink recipe app! We have over 600+ drinks and 480+ ingrediates to share with you!"
+        puts "Welcome to our CLI Drink Recipe Aaplication! We have over 600+ drinks, and 480+ ingrediates to share with you!"
+        puts ""
+        puts "If at any time you would like to exit the program, simply type in Q. "
         self.ask_for_drink_or_input
     end
+
+  
 
     def ask_for_drink_or_input
         puts ""
         puts "Please make a selection to get started."
         puts ""
         puts "1. Choose from the top 10 drinks World Wide"
-        puts "2. Give us a liquor to find drinks and their recipes." 
+        puts "2. Select a liquor to find drinks and their recipes." 
         input = gets.strip
         self.input_from_step_1(input)
     end
@@ -21,8 +25,10 @@ class CLI
             top_ten_drinks
         elsif input == "2" || input.include?("recipe") || input.include?("Recipe") || input.include?("liquor") || input.include?("Liquor")
             request_from_liquor
+        elsif input == "q" || "Q"
+            user_quit
         else 
-            puts "That selection was invalid, please selectt either 1 or 2."
+            puts "That selection was invalid, please select either 1 or 2."
             self.ask_for_drink_or_input
         end
     end
@@ -40,7 +46,7 @@ class CLI
         puts "9.  Manhattan"  
         puts "10. Moscow Mule"
         puts ""
-        puts "or... to change your mind to search by liquor, type in 'LIQUOR'"
+        puts "or... to search by liquor tyoe, enter 'LIQUOR'"
         input = gets.strip
         self.user_input_drink(input) 
     end
@@ -67,8 +73,10 @@ class CLI
             new_recipe = Api.get_drink_by_name(top_ten["9"])
         elsif input == "10" || input == "moscow mule" || input == "Moscow Mule" || input == "Moscow mule" || input == "mule" || input == "mos" 
             new_recipe = Api.get_drink_by_name(top_ten["10"])
-        elsif input == "LIQUOR"
+        elsif input == "LIQUOR" || "liquor" || "Liquor"
             request_from_liquor
+        elsif input == "q" || "Q"
+            user_quit
         else
             puts "Your input was invalid."
             self.ask_for_drink_or_input
@@ -81,7 +89,7 @@ class CLI
         puts ""
         puts "The recommended glass to use for your #{new_recipe.name} is the  #{new_recipe.glass}"
         puts ""
-        puts "The ingredients and the amounts are:"
+        puts "The ingredients and their  amounts to use are:"
         amounts_of_ingredients = new_recipe.ingredients.zip(new_recipe.amounts)
         amounts_of_ingredients.each do |ing, amt|
             puts "#{ing}: #{amt}"
@@ -109,7 +117,7 @@ class CLI
         puts "5. Vodka"
         puts "6. Whisky"
         puts ""
-        puts "or...to change your mind to search by the top 10 drinks in the world, tyoe in 'TOP TEN'"
+        puts "or...to change your mind and search by the top 10 drinks in the world, type in 'TOP TEN'"
         input = gets.strip
 
         user_input_liquor(input)
@@ -129,8 +137,10 @@ class CLI
             new_drink = Api.get_drink_by_liquor(liquor_list["5"])
         elsif input == "6"
             new_drink = Api.get_drink_by_liquor(liquor_list["6"])
-        elsif input == "TOP TEN"
+        elsif input == "TOP TEN" || "top ten" || "Top ten" || "top Ten" || "Top Ten"
             top_ten_drinks
+        elsif input == "q" || "Q"
+            user_quit
         else
             puts "Your input was invalid"
             self.request_from_liquor
@@ -140,24 +150,28 @@ class CLI
 
     def display_of_drinks(new_drink)
         puts ""                                                                                                
-        puts "Thank you, here is the list of the drinks from your selection."
+        puts "Thank you, here is the list of drinks from your selection."
         puts ""
-        puts "Please make a selection from the following list by typing in the coralating number."
+        puts "Please make a selection from the following list by entering  the correlating number."
         new_drink.each_with_index{|j,i| puts "#{i +1}. #{j.name}"}
         input = gets.strip
-        # binding.pry
+
         input = input.to_i
-        # binding.pry
         if (1..new_drink.count) === input
             input = new_drink[input-1].name  
             new_recipe = Api.get_drink_by_name(input)       
             self.recipe_display(new_recipe)
+        elsif input == "q" || "Q"
+            user_quit
         else 
             puts "Your input was invalid"
-            self.display_of_drinks(new_drink)
-            binding.pry
         end
+        self.display_of_drinks(new_drink)
     end
+
+
+
+
 
 ########################################
 
@@ -169,7 +183,7 @@ class CLI
             input = gets.strip
             if input == "1"
                 self.ask_for_drink_or_input
-            elsif input == "2"
+            elsif input == "2" || "Q" || "q"
                 self.exit_application
             else
                 puts "Invalid Input"
@@ -182,3 +196,6 @@ class CLI
     end
 end
 
+def user_quit
+    exit_application 
+end

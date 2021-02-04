@@ -30,7 +30,26 @@ level one deep 2nd api
                     6. gin 1..10
                         return users recipes for drinks
 
-#new_drink[input-1].name
-        # def new_pass
-        #     new_drink[input-1].name  
-        # end
+
+
+I have already set up the majority of the  CLI project...
+
+No factoring has been done, not gems that will increase the usersexperience have
+been installed. 
+
+I am simply recordin as I try to break it and set up any error handling that has not
+already been done. 
+
+Thanks for watching!
+
+
+Possible refactoring
+    user input Q for quit
+    error handling?
+
+
+ideas for better app
+    gems to better the appearance and user experience
+        colorize?
+
+        something that displays the large options for the user in a more readable "table" of choices?
