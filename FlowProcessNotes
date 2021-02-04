@@ -1,0 +1,31 @@
+Level one deep
+    ask for choice of favorite drinks
+        recieve answers from selections
+            1. mojito
+            2. old fashioned
+            3. long island tea
+            4. negroni
+            5. mai tai
+            6. dry martini
+            7. daiquiri
+            8. margarita
+            9. manhattan
+            10. moscow mule
+                return users recipes for drinks
+level one deep 2nd api
+    ask for favorite spirits from list
+        1. vodka
+        2. rum
+        3. tequila
+        4. whisky
+        5. brandy
+        6. gin
+            take spirits answer and provide a list of drinks 1..10
+                level two deep  
+                    1. vodka  1..10
+                    2. rum 1..10
+                    3. tequila 1..10
+                    4. whisky 1..10
+                    5. brandy 1..10
+                    6. gin 1..10
+                        return users recipes for drinks
