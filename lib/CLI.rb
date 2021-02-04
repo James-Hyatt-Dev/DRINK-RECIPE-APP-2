@@ -135,22 +135,28 @@ class CLI
             puts "Your input was invalid"
             self.request_from_liquor
         end
-        final_display_of_drinks(new_drink)
+        display_of_drinks(new_drink)
     end
 
-    def final_display_of_drinks(new_drink) 
+    def display_of_drinks(new_drink)
         puts ""                                                                                                
         puts "Thank you, here is the list of the drinks from your selection."
         puts ""
         puts "Please make a selection from the following list by typing in the coralating number."
         new_drink.each_with_index{|j,i| puts "#{i +1}. #{j.name}"}
         input = gets.strip
-        
+        # binding.pry
         input = input.to_i
-        input = new_drink[input-1].name  #Drink.all_drinks   
-             
-        new_recipe = Api.get_drink_by_name(input)       
-        self.recipe_display(new_recipe)
+        # binding.pry
+        if (1..new_drink.count) === input
+            input = new_drink[input-1].name  
+            new_recipe = Api.get_drink_by_name(input)       
+            self.recipe_display(new_recipe)
+        else 
+            puts "Your input was invalid"
+            self.display_of_drinks(new_drink)
+            binding.pry
+        end
     end
 
 ########################################
@@ -175,3 +181,4 @@ class CLI
         abort("Thank you for using our Drink Recipe Application! Have A Great Day!")
     end
 end
+
