@@ -89,8 +89,8 @@ class CLI
         puts ""
         puts "Now the best part! Time to make your drink!"
         puts ""
-        puts "#{new_recipe.instructions}"
         binding.pry
+        puts "#{new_recipe.instructions}"
         self.main_menu
     end
 

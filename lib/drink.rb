@@ -6,7 +6,7 @@ class Drink
 
     def initialize(hash)
         hash.each do |k,v|
-            self.send("#{k}=", "#{v}") if self. respond_to?("#{k}=")
+            self.send("#{k}=", v) if self. respond_to?("#{k}=")
         end
 
         @@all_drinks << self

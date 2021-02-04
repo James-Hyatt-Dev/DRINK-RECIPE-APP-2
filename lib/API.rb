@@ -29,12 +29,11 @@ class Api
         end.values.select do |j|
             j 
         end
-
         recipe_array = {
             glass: response["drinks"][0]["strGlass"], 
             instructions: response["drinks"][0]["strInstructions"], 
-            ingredients: ingredients, 
-            amounts: measurements, 
+            ingredients: ingredients,
+            amounts: measurements,
             name: response["drinks"][0]["strDrink"]
         }
         Recipe.new(recipe_array)
