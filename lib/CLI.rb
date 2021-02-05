@@ -1,21 +1,24 @@
 class CLI  
 
+   
+
     def welcome
         puts ""
-        puts "Welcome to our CLI Drink Recipe Application! We have over 600+ drinks, and 480+ ingrediates to share with you!"
+        puts "Welcome to our CLI Drink Recipe Application! We have over 600+ drinks, and 480+ ingrediates to share with you!".colorize(:light_blue)
         puts ""
-        puts "If at any time you would like to exit the program, simply type in Q. "
+        puts "If at any time you would like to exit the program, simply type in Q. ".colorize(:light_blue)
         self.ask_for_drink_or_input
+      
     end
 
   
 
     def ask_for_drink_or_input
         puts ""
-        puts "Please make a selection to get started."
+        puts "Please make a selection to get started.".colorize(:green)
         puts ""
-        puts "1. Choose from the top 10 drinks World Wide"
-        puts "2. Select a liquor to find drinks and their recipes." 
+        puts "1. Choose from the top 10 drinks World Wide".colorize(:yellow)
+        puts "2. Select a liquor to find drinks and their recipes.".colorize(:yellow)
         input = gets.strip
         self.input_from_step_1(input)
     end
@@ -28,25 +31,44 @@ class CLI
         elsif input == "q" || input == "Q"
             user_quit
         else 
-            puts "That selection was invalid, please select either 1 or 2."
+            puts "That selection was invalid, please select either 1 or 2.".colorize(:red)
             self.ask_for_drink_or_input
         end
     end
 
     def top_ten_drinks
-        puts ""
-        puts "1.  Mojito"    
-        puts "2.  Old Fashioned"  
-        puts "3.  Long Island Tea"    
-        puts "4.  Negroni"    
-        puts "5.  Mai Tai"
-        puts "6.  Dry Martini"   
-        puts "7.  Daiquiri"    
-        puts "8.  Margarita"  
-        puts "9.  Manhattan"  
-        puts "10. Moscow Mule"
-        puts ""
-        puts "or... to search by liquor type, enter 'LIQUOR'"
+        rows = []
+        rows << ['1.', 'Mojito']
+        rows << ['2.', 'Old Fashioned']
+        rows << ['3.', 'Long Island Tea']
+        rows << ['4.', 'Negroni']
+        rows << ['5.', 'Mai Tai']
+        rows << ['6.', 'Dry Martini']
+        rows << ['7.', 'Daiquiri']
+        rows << ['8.', 'Margarita']
+        rows << ['9.', 'Manhattan']
+        rows << ['10.', 'Moscow Mule']
+        rows << ['LIQUOR'.colorize(:red), 'Search by liquor'.colorize(:red)]
+        table = Terminal::Table.new :title => "Top Ten Drinks World Wide".colorize(:green), :headings => ['Option'.colorize(:yellow), 'Drinks'.colorize(:yellow)], :rows => rows
+
+         
+        puts table
+
+    
+
+    #     puts ""
+    #     puts "1.  Mojito"    
+    #     puts "2.  Old Fashioned"  
+    #     puts "3.  Long Island Tea"    
+    #     puts "4.  Negroni"    
+    #     puts "5.  Mai Tai"
+    #     puts "6.  Dry Martini"   
+    #     puts "7.  Daiquiri"    
+    #     puts "8.  Margarita"  
+    #     puts "9.  Manhattan"  
+    #     puts "10. Moscow Mule"
+    #     puts ""
+        # puts "or... to search by liquor type, enter 'LIQUOR'".colorize(:red)
         input = gets.strip
         self.user_input_drink(input) 
     end
@@ -78,7 +100,7 @@ class CLI
         elsif input == "q" || input == "Q"
             user_quit
         else
-            puts "Your input was invalid."
+            puts "Your input was invalid.".colorize(:red)
             self.ask_for_drink_or_input
         end
         self.recipe_display(new_recipe)
@@ -141,7 +163,7 @@ class CLI
         elsif input == "q" || input == "Q"
             user_quit
         else
-            puts "Your input was invalid"
+            puts "Your input was invalid".colorize(:red)
             self.request_from_liquor
         end
         display_of_drinks(new_drink)
@@ -162,11 +184,11 @@ class CLI
             elsif input == "q" || input == "Q"
                 user_quit
             else 
-                puts "Your input was invalid"
+                puts "Your input was invalid".colorize(:red)
             end
         self.display_of_drinks(new_drink)
         end
-    end
+    
 
 
 
@@ -185,7 +207,7 @@ class CLI
         elsif input == "2" || input == "Q" || input == "q"
             self.exit_application
         else
-            puts "Invalid Input"
+            puts "Invalid Input".colorize(:red)
             self.main.menu
         end
     def exit_application
@@ -194,4 +216,5 @@ class CLI
 
     user_quit = exit_application 
     
+end
 end
