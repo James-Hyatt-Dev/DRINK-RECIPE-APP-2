@@ -29,7 +29,7 @@ class CLI
         elsif input == "2" || input.include?("recipe") || input.include?("Recipe") || input.include?("liquor") || input.include?("Liquor")
             request_from_liquor
         elsif input == "q" || input == "Q"
-            user_quit
+            self.exit_application
         else 
             puts "That selection was invalid, please select either 1 or 2.".colorize(:red)
             self.ask_for_drink_or_input
@@ -89,17 +89,17 @@ class CLI
     end
 
     def recipe_display(new_recipe)
-        puts "All the wonderful information you requested for your #{new_recipe.name} drink.".colorize(:green)
+        puts "All the wonderful information you requested for your #{new_recipe.name} drink"
         puts ""
-        puts "The recommended glass to use for your #{new_recipe.name.colorize(:yellow)} is the  #{new_recipe.glass.colorize(:yellow)}" 
+        puts "The recommended glass to use for your #{new_recipe.name} is the  #{new_recipe.glass}"
         puts ""
-        puts "The ingredients and their  amounts to use are:".colorize(:green)
+        puts "The ingredients and their  amounts to use are:"
         amounts_of_ingredients = new_recipe.ingredients.zip(new_recipe.amounts)
         amounts_of_ingredients.each do |ing, amt|
             puts "#{ing}: #{amt}"
         end
         puts ""
-        puts "Now the best part! Time to make your drink!".colorize(:green)
+        puts "Now the best part! Time to make your drink!"
         puts ""
         puts "#{new_recipe.instructions}"
         main_menu
@@ -109,20 +109,18 @@ class CLI
 ########################################
 
     def request_from_liquor
-        puts ""
-        puts "Below is a list of 6 liquors/spirits"
-        puts ""
-        puts "Select from the choices below:"
-        puts ""
-        puts "1. Brandy"
-        puts "2. Gin"
-        puts "3. Rum"
-        puts "4. Tequila"
-        puts "5. Vodka"
-        puts "6. Whisky"
-        puts ""
-        puts "or...to change your mind and search by the top 10 drinks in the world, type in 'TOP TEN'"
+        rows = []
+        rows << ['1', 'Brandy']
+        rows << ['2', 'Gin']
+        rows << ['3', 'Rum']
+        rows << ['4', 'Tequila']
+        rows << ['5', 'Vodka']
+        rows << ['6', 'Whisky']
+        rows << ['TOP TEN', 'Search by Top Ten Drinks']
+        table = Terminal::Table.new :title => "Top 6 Spirits World wide".colorize(:green), :headings => ['Option'.colorize(:yellow), 'Spirit'.colorize(:yellow)], :rows => rows
+        puts table
         input = gets.strip
+    
         user_input_liquor(input)
     end
 
@@ -180,9 +178,9 @@ class CLI
 
     def main_menu
         puts ""
-        puts "If you wish to look up another recipe, please enter 1".colorize(:green)
+        puts "If you wish to look up another recipe, please enter 1"
         puts ""
-        puts "If you wish to exit the application, please enter 2".colorize(:red)
+        puts "If you wish to exit the application, please enter 2"
         input = gets.strip
         if input == "1"
             self.ask_for_drink_or_input
@@ -190,13 +188,13 @@ class CLI
             self.exit_application
         else
             puts "Invalid Input".colorize(:red)
-            self.main.menu
+            self.self.main.menu
         end
+    end
+
     def exit_application
         abort("Thank you for using our Drink Recipe Application! Have A Great Day!")
     end
 
-    user_quit = exit_application 
+    
 end
-end
-
