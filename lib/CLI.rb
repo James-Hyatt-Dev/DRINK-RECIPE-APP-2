@@ -50,25 +50,7 @@ class CLI
         rows << ['10.', 'Moscow Mule']
         rows << ['LIQUOR'.colorize(:red), 'Search by liquor'.colorize(:red)]
         table = Terminal::Table.new :title => "Top Ten Drinks World Wide".colorize(:green), :headings => ['Option'.colorize(:yellow), 'Drinks'.colorize(:yellow)], :rows => rows
-
-         
         puts table
-
-    
-
-    #     puts ""
-    #     puts "1.  Mojito"    
-    #     puts "2.  Old Fashioned"  
-    #     puts "3.  Long Island Tea"    
-    #     puts "4.  Negroni"    
-    #     puts "5.  Mai Tai"
-    #     puts "6.  Dry Martini"   
-    #     puts "7.  Daiquiri"    
-    #     puts "8.  Margarita"  
-    #     puts "9.  Manhattan"  
-    #     puts "10. Moscow Mule"
-    #     puts ""
-        # puts "or... to search by liquor type, enter 'LIQUOR'".colorize(:red)
         input = gets.strip
         self.user_input_drink(input) 
     end
@@ -107,17 +89,17 @@ class CLI
     end
 
     def recipe_display(new_recipe)
-        puts "All the wonderful information you requested for your #{new_recipe.name} drink"
+        puts "All the wonderful information you requested for your #{new_recipe.name} drink.".colorize(:green)
         puts ""
-        puts "The recommended glass to use for your #{new_recipe.name} is the  #{new_recipe.glass}"
+        puts "The recommended glass to use for your #{new_recipe.name.colorize(:yellow)} is the  #{new_recipe.glass.colorize(:yellow)}" 
         puts ""
-        puts "The ingredients and their  amounts to use are:"
+        puts "The ingredients and their  amounts to use are:".colorize(:green)
         amounts_of_ingredients = new_recipe.ingredients.zip(new_recipe.amounts)
         amounts_of_ingredients.each do |ing, amt|
             puts "#{ing}: #{amt}"
         end
         puts ""
-        puts "Now the best part! Time to make your drink!"
+        puts "Now the best part! Time to make your drink!".colorize(:green)
         puts ""
         puts "#{new_recipe.instructions}"
         main_menu
@@ -198,9 +180,9 @@ class CLI
 
     def main_menu
         puts ""
-        puts "If you wish to look up another recipe, please enter 1"
+        puts "If you wish to look up another recipe, please enter 1".colorize(:green)
         puts ""
-        puts "If you wish to exit the application, please enter 2"
+        puts "If you wish to exit the application, please enter 2".colorize(:red)
         input = gets.strip
         if input == "1"
             self.ask_for_drink_or_input
@@ -215,6 +197,6 @@ class CLI
     end
 
     user_quit = exit_application 
-    
 end
 end
+
