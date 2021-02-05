@@ -68,39 +68,6 @@ class CLI
         end
         self.recipe_display(new_recipe)
     end
-            
-       
-       
-
-
-        # elsif input == "2" || input == "old fashioned" || input == "Old fashioned" || input == "Old Fashioned" || input == "old" || input == "Old" 
-        #     new_recipe = Api.get_drink_by_name(top_ten["2"])
-        # elsif input == "3" || input == "long island tea" || input == "Long island tea" || input == "Long Island Tea" || input == "long" || input == "Long" 
-        #     new_recipe = Api.get_drink_by_name(top_ten["3"])
-        # elsif input == "4" || input == "negroni" || input == "Negroni" || input == "neg" || input == "Neg" || input == "negron" 
-        #     new_recipe = Api.get_drink_by_name(top_ten["4"])
-        # elsif input == "5" || input == "Mai Tai" || input == "mai tai" || input == "Mai tai" || input == "Mai" || input == "mai" 
-        #     new_recipe = Api.get_drink_by_name(top_ten["5"])
-        # elsif input == "6" || input == "dry martini" || input == "Dry Martini" || input == "Dry martini" || input == "Dry" || input == "dry" 
-        #     new_recipe = Api.get_drink_by_name(top_ten["6"])
-        # elsif input == "8" || input == "margarita" || input == "Margarita" || input == "Marg" || input == "marg" || input == "margarit" 
-        #     new_recipe = Api.get_drink_by_name(top_ten["8"])
-        # elsif input == "7" || input == "daiquiri" || input == "Daiquiri" || input == "Daquiri" || input == "daquiri" || input == "dag" 
-        #     new_recipe = Api.get_drink_by_name(top_ten["7"])
-        # elsif input == "9" || input == "manhattan" || input == "Manhattan" || input == "manhatan" || input == "Manhatan" || input == "man" 
-        #     new_recipe = Api.get_drink_by_name(top_ten["9"])
-        # elsif input == "10" || input == "moscow mule" || input == "Moscow Mule" || input == "Moscow mule" || input == "mule" || input == "mos" 
-        #     new_recipe = Api.get_drink_by_name(top_ten["10"])
-        # elsif input == "11" || input == "liquor" || input == "Liquor"
-        #     request_from_liquor
-    #     elsif input == "q" || input == "Q"
-    #         user_quit
-    #     else
-    #         puts "Your input was invalid.".colorize(:red)
-    #         self.ask_for_drink_or_input
-    #     end
-    #     self.recipe_display(new_recipe)
-    # end
 
     def recipe_display(new_recipe)
         puts "All the wonderful information you requested for your #{new_recipe.name} drink.".colorize(:green)
@@ -139,10 +106,21 @@ class CLI
     def user_input_liquor(input)
        
         liquor_list = {"1" => "Brandy", "2" => "Gin", "3" => "Rum", "4" => "Tequila", "5" => "Vodka", "6" => "Whisky"}
-        
+        input_value2 = top_ten[(input)]
+        if input.to_i.between?(1,7) 
+            new_drink = Api.get_drink_by_liquor(input_value2)
 
-        # input.to_i
-        # liquor_list = liquor_list(input)
+
+
+    #         new_recipe = Api.get_drink_by_name(input_value)
+    #     elsif input == "q" || input == "Q" || input == "End" || input == "end"
+    #         exit_program
+    #     else
+    #         puts "Your input was invalid.".colorize(:red)
+    #         self.ask_for_drink_or_input
+    #     end
+    #     self.recipe_display(new_recipe)
+    # end
 
         if input == "1"
             new_drink = Api.get_drink_by_liquor(liquor_list["1"])
