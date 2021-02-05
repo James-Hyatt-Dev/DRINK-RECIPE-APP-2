@@ -48,7 +48,7 @@ class CLI
         rows << ['8.', 'Margarita']
         rows << ['9.', 'Manhattan']
         rows << ['10.', 'Moscow Mule']
-        rows << ['LIQUOR'.colorize(:red), 'Search by liquor'.colorize(:red)]
+        rows << ['11'.colorize(:red), 'Search by liquor'.colorize(:red)]
         table = Terminal::Table.new :title => "Top Ten Drinks World Wide".colorize(:green), :headings => ['Option'.colorize(:yellow), 'Drinks'.colorize(:yellow)], :rows => rows
         puts table
         input = gets.strip
@@ -57,51 +57,64 @@ class CLI
 
     def user_input_drink(input)
         top_ten = {"1" => "Mojito", "2" => "Old Fashioned", "3" => "Long Island Tea", "4" => "Negroni", "5" => "Mai Tai", "6" => "Dry Martini", "7" => "Daiquiri", "8" => "Margarita", "9" => "Manhattan", "10" => "Moscow Mule"}
-         if input == "1" || input == "mojito" || input == "Mojito" 
-            new_recipe = Api.get_drink_by_name(top_ten["1"])
-        elsif input == "2" || input == "old fashioned" || input == "Old fashioned" || input == "Old Fashioned" || input == "old" || input == "Old" 
-            new_recipe = Api.get_drink_by_name(top_ten["2"])
-        elsif input == "3" || input == "long island tea" || input == "Long island tea" || input == "Long Island Tea" || input == "long" || input == "Long" 
-            new_recipe = Api.get_drink_by_name(top_ten["3"])
-        elsif input == "4" || input == "negroni" || input == "Negroni" || input == "neg" || input == "Neg" || input == "negron" 
-            new_recipe = Api.get_drink_by_name(top_ten["4"])
-        elsif input == "5" || input == "Mai Tai" || input == "mai tai" || input == "Mai tai" || input == "Mai" || input == "mai" 
-            new_recipe = Api.get_drink_by_name(top_ten["5"])
-        elsif input == "6" || input == "dry martini" || input == "Dry Martini" || input == "Dry martini" || input == "Dry" || input == "dry" 
-            new_recipe = Api.get_drink_by_name(top_ten["6"])
-        elsif input == "8" || input == "margarita" || input == "Margarita" || input == "Marg" || input == "marg" || input == "margarit" 
-            new_recipe = Api.get_drink_by_name(top_ten["8"])
-        elsif input == "7" || input == "daiquiri" || input == "Daiquiri" || input == "Daquiri" || input == "daquiri" || input == "dag" 
-            new_recipe = Api.get_drink_by_name(top_ten["7"])
-        elsif input == "9" || input == "manhattan" || input == "Manhattan" || input == "manhatan" || input == "Manhatan" || input == "man" 
-            new_recipe = Api.get_drink_by_name(top_ten["9"])
-        elsif input == "10" || input == "moscow mule" || input == "Moscow Mule" || input == "Moscow mule" || input == "mule" || input == "mos" 
-            new_recipe = Api.get_drink_by_name(top_ten["10"])
-        elsif input == "LIQUOR" || input == "liquor" || input == "Liquor"
-            request_from_liquor
-        elsif input == "q" || input == "Q"
-            user_quit
+        input_value = top_ten[(input)]
+        if input.to_i.between?(1,11) 
+            new_recipe = Api.get_drink_by_name(input_value)
+        elsif input == "q" || input == "Q" || input == "End" || input == "end"
+            exit_program
         else
             puts "Your input was invalid.".colorize(:red)
             self.ask_for_drink_or_input
         end
         self.recipe_display(new_recipe)
     end
+            
+       
+       
+
+
+        # elsif input == "2" || input == "old fashioned" || input == "Old fashioned" || input == "Old Fashioned" || input == "old" || input == "Old" 
+        #     new_recipe = Api.get_drink_by_name(top_ten["2"])
+        # elsif input == "3" || input == "long island tea" || input == "Long island tea" || input == "Long Island Tea" || input == "long" || input == "Long" 
+        #     new_recipe = Api.get_drink_by_name(top_ten["3"])
+        # elsif input == "4" || input == "negroni" || input == "Negroni" || input == "neg" || input == "Neg" || input == "negron" 
+        #     new_recipe = Api.get_drink_by_name(top_ten["4"])
+        # elsif input == "5" || input == "Mai Tai" || input == "mai tai" || input == "Mai tai" || input == "Mai" || input == "mai" 
+        #     new_recipe = Api.get_drink_by_name(top_ten["5"])
+        # elsif input == "6" || input == "dry martini" || input == "Dry Martini" || input == "Dry martini" || input == "Dry" || input == "dry" 
+        #     new_recipe = Api.get_drink_by_name(top_ten["6"])
+        # elsif input == "8" || input == "margarita" || input == "Margarita" || input == "Marg" || input == "marg" || input == "margarit" 
+        #     new_recipe = Api.get_drink_by_name(top_ten["8"])
+        # elsif input == "7" || input == "daiquiri" || input == "Daiquiri" || input == "Daquiri" || input == "daquiri" || input == "dag" 
+        #     new_recipe = Api.get_drink_by_name(top_ten["7"])
+        # elsif input == "9" || input == "manhattan" || input == "Manhattan" || input == "manhatan" || input == "Manhatan" || input == "man" 
+        #     new_recipe = Api.get_drink_by_name(top_ten["9"])
+        # elsif input == "10" || input == "moscow mule" || input == "Moscow Mule" || input == "Moscow mule" || input == "mule" || input == "mos" 
+        #     new_recipe = Api.get_drink_by_name(top_ten["10"])
+        # elsif input == "11" || input == "liquor" || input == "Liquor"
+        #     request_from_liquor
+    #     elsif input == "q" || input == "Q"
+    #         user_quit
+    #     else
+    #         puts "Your input was invalid.".colorize(:red)
+    #         self.ask_for_drink_or_input
+    #     end
+    #     self.recipe_display(new_recipe)
+    # end
 
     def recipe_display(new_recipe)
-        puts "All the wonderful information you requested for your #{new_recipe.name} drink"
+        puts "All the wonderful information you requested for your #{new_recipe.name} drink.".colorize(:green)
+        puts "The recommended glass to use for your".colorize(:green) +  " #{new_recipe.name.colorize(:yellow)}" + ", is the".colorize(:green) + " #{new_recipe.glass.colorize(:yellow)}" + ".".colorize(:green)
+        puts "The ingredients and their amounts to use are:".colorize(:green)
         puts ""
-        puts "The recommended glass to use for your #{new_recipe.name} is the  #{new_recipe.glass}"
-        puts ""
-        puts "The ingredients and their  amounts to use are:"
         amounts_of_ingredients = new_recipe.ingredients.zip(new_recipe.amounts)
         amounts_of_ingredients.each do |ing, amt|
             puts "#{ing}: #{amt}"
         end
         puts ""
-        puts "Now the best part! Time to make your drink!"
+        puts "Now the best part! Time to make your drink!".colorize(:green)
         puts ""
-        puts "#{new_recipe.instructions}"
+        puts "#{new_recipe.instructions}".colorize(:yellow)
         main_menu
     end
 
@@ -116,16 +129,21 @@ class CLI
         rows << ['4', 'Tequila']
         rows << ['5', 'Vodka']
         rows << ['6', 'Whisky']
-        rows << ['TOP TEN', 'Search by Top Ten Drinks']
+        rows << ['7'.colorize(:red), 'Search by Top Ten Drinks'.colorize(:red)]
         table = Terminal::Table.new :title => "Top 6 Spirits World wide".colorize(:green), :headings => ['Option'.colorize(:yellow), 'Spirit'.colorize(:yellow)], :rows => rows
         puts table
         input = gets.strip
-    
-        user_input_liquor(input)
+        self.user_input_liquor(input)
     end
 
     def user_input_liquor(input)
+       
         liquor_list = {"1" => "Brandy", "2" => "Gin", "3" => "Rum", "4" => "Tequila", "5" => "Vodka", "6" => "Whisky"}
+        
+
+        # input.to_i
+        # liquor_list = liquor_list(input)
+
         if input == "1"
             new_drink = Api.get_drink_by_liquor(liquor_list["1"])
         elsif input == "2"
@@ -138,7 +156,7 @@ class CLI
             new_drink = Api.get_drink_by_liquor(liquor_list["5"])
         elsif input == "6"
             new_drink = Api.get_drink_by_liquor(liquor_list["6"])
-        elsif input == "TOP TEN" || input == "top ten" || input == "Top ten" || input == "top Ten" || input == "Top Ten"
+        elsif input == "7" || input == "top ten" || input == "Top ten" || input == "top Ten" || input == "Top Ten"
             top_ten_drinks
         elsif input == "q" || input == "Q"
             user_quit
@@ -178,9 +196,9 @@ class CLI
 
     def main_menu
         puts ""
-        puts "If you wish to look up another recipe, please enter 1"
+        puts "If you wish to look up another recipe, please enter 1".colorize(:green)
         puts ""
-        puts "If you wish to exit the application, please enter 2"
+        puts "If you wish to exit the application, please enter 2".colorize(:red)
         input = gets.strip
         if input == "1"
             self.ask_for_drink_or_input
@@ -188,7 +206,7 @@ class CLI
             self.exit_application
         else
             puts "Invalid Input".colorize(:red)
-            self.self.main.menu
+            self.main.menu
         end
     end
 
