@@ -45,6 +45,3 @@ License
 
     This project is licensed under the CC0 1.0 Universal Creative Commons License - see the LICENSE.md file for details
 
-
-How to run the program in your CLI
-    tyoe 'bin/run' from your CLI

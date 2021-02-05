@@ -2,7 +2,7 @@ class CLI
 
     def welcome
         puts ""
-        puts "Welcome to our CLI Drink Recipe Aaplication! We have over 600+ drinks, and 480+ ingrediates to share with you!"
+        puts "Welcome to our CLI Drink Recipe Application! We have over 600+ drinks, and 480+ ingrediates to share with you!"
         puts ""
         puts "If at any time you would like to exit the program, simply type in Q. "
         self.ask_for_drink_or_input
@@ -25,7 +25,7 @@ class CLI
             top_ten_drinks
         elsif input == "2" || input.include?("recipe") || input.include?("Recipe") || input.include?("liquor") || input.include?("Liquor")
             request_from_liquor
-        elsif input == "q" || "Q"
+        elsif input == "q" || input == "Q"
             user_quit
         else 
             puts "That selection was invalid, please select either 1 or 2."
@@ -46,7 +46,7 @@ class CLI
         puts "9.  Manhattan"  
         puts "10. Moscow Mule"
         puts ""
-        puts "or... to search by liquor tyoe, enter 'LIQUOR'"
+        puts "or... to search by liquor type, enter 'LIQUOR'"
         input = gets.strip
         self.user_input_drink(input) 
     end
@@ -73,9 +73,9 @@ class CLI
             new_recipe = Api.get_drink_by_name(top_ten["9"])
         elsif input == "10" || input == "moscow mule" || input == "Moscow Mule" || input == "Moscow mule" || input == "mule" || input == "mos" 
             new_recipe = Api.get_drink_by_name(top_ten["10"])
-        elsif input == "LIQUOR" || "liquor" || "Liquor"
+        elsif input == "LIQUOR" || input == "liquor" || input == "Liquor"
             request_from_liquor
-        elsif input == "q" || "Q"
+        elsif input == "q" || input == "Q"
             user_quit
         else
             puts "Your input was invalid."
@@ -98,7 +98,7 @@ class CLI
         puts "Now the best part! Time to make your drink!"
         puts ""
         puts "#{new_recipe.instructions}"
-        self.main_menu
+        main_menu
     end
 
     
@@ -119,7 +119,6 @@ class CLI
         puts ""
         puts "or...to change your mind and search by the top 10 drinks in the world, type in 'TOP TEN'"
         input = gets.strip
-
         user_input_liquor(input)
     end
 
@@ -137,9 +136,9 @@ class CLI
             new_drink = Api.get_drink_by_liquor(liquor_list["5"])
         elsif input == "6"
             new_drink = Api.get_drink_by_liquor(liquor_list["6"])
-        elsif input == "TOP TEN" || "top ten" || "Top ten" || "top Ten" || "Top Ten"
+        elsif input == "TOP TEN" || input == "top ten" || input == "Top ten" || input == "top Ten" || input == "Top Ten"
             top_ten_drinks
-        elsif input == "q" || "Q"
+        elsif input == "q" || input == "Q"
             user_quit
         else
             puts "Your input was invalid"
@@ -155,18 +154,18 @@ class CLI
         puts "Please make a selection from the following list by entering  the correlating number."
         new_drink.each_with_index{|j,i| puts "#{i +1}. #{j.name}"}
         input = gets.strip
-
         input = input.to_i
-        if (1..new_drink.count) === input
-            input = new_drink[input-1].name  
-            new_recipe = Api.get_drink_by_name(input)       
-            self.recipe_display(new_recipe)
-        elsif input == "q" || "Q"
-            user_quit
-        else 
-            puts "Your input was invalid"
-        end
+            if (1..new_drink.count) === input
+                input = new_drink[input-1].name  
+                new_recipe = Api.get_drink_by_name(input)       
+                self.recipe_display(new_recipe)
+            elsif input == "q" || input == "Q"
+                user_quit
+            else 
+                puts "Your input was invalid"
+            end
         self.display_of_drinks(new_drink)
+        end
     end
 
 
@@ -177,25 +176,22 @@ class CLI
 
     def main_menu
         puts ""
-            puts "If you wish to look up another recipe, please enter 1"
-            puts ""
-            puts "If you wish to exit the application, please enter 2"
-            input = gets.strip
-            if input == "1"
-                self.ask_for_drink_or_input
-            elsif input == "2" || "Q" || "q"
-                self.exit_application
-            else
-                puts "Invalid Input"
-                self.main.menu
-            end
+        puts "If you wish to look up another recipe, please enter 1"
+        puts ""
+        puts "If you wish to exit the application, please enter 2"
+        input = gets.strip
+        if input == "1"
+            self.ask_for_drink_or_input
+        elsif input == "2" || input == "Q" || input == "q"
+            self.exit_application
+        else
+            puts "Invalid Input"
+            self.main.menu
         end
-
     def exit_application
         abort("Thank you for using our Drink Recipe Application! Have A Great Day!")
     end
-end
 
-def user_quit
-    exit_application 
+    user_quit = exit_application 
+    
 end

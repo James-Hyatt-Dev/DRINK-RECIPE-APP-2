@@ -1,5 +1,8 @@
 require 'pry'
 require 'httparty'
+require 'terminal-table'
+require 'colorize'
+
 
 require_relative('../lib/API')
 require_relative('../lib/CLI')
