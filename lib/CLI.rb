@@ -106,36 +106,9 @@ class CLI
     def user_input_liquor(input)
        
         liquor_list = {"1" => "Brandy", "2" => "Gin", "3" => "Rum", "4" => "Tequila", "5" => "Vodka", "6" => "Whisky"}
-        input_value2 = top_ten[(input)]
+        input_value = top_ten[(input)]
         if input.to_i.between?(1,7) 
             new_drink = Api.get_drink_by_liquor(input_value2)
-
-
-
-    #         new_recipe = Api.get_drink_by_name(input_value)
-    #     elsif input == "q" || input == "Q" || input == "End" || input == "end"
-    #         exit_program
-    #     else
-    #         puts "Your input was invalid.".colorize(:red)
-    #         self.ask_for_drink_or_input
-    #     end
-    #     self.recipe_display(new_recipe)
-    # end
-
-        if input == "1"
-            new_drink = Api.get_drink_by_liquor(liquor_list["1"])
-        elsif input == "2"
-            new_drink = Api.get_drink_by_liquor(liquor_list["2"])
-        elsif input == "3"
-            new_drink = Api.get_drink_by_liquor(liquor_list["3"])
-        elsif input == "4"
-            new_drink = Api.get_drink_by_liquor(liquor_list["4"])
-        elsif input == "5"
-            new_drink = Api.get_drink_by_liquor(liquor_list["5"])
-        elsif input == "6"
-            new_drink = Api.get_drink_by_liquor(liquor_list["6"])
-        elsif input == "7" || input == "top ten" || input == "Top ten" || input == "top Ten" || input == "Top Ten"
-            top_ten_drinks
         elsif input == "q" || input == "Q"
             user_quit
         else
