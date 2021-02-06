@@ -128,28 +128,24 @@ class CLI
 
     def display_of_drinks(new_drink)
         puts ""                                                                                                
-        puts "Thank you, here is the list of drinks from your selection."
+        puts "Thank you, here is the list of drinks from your selection.".colorize(:green)
         puts ""
-        puts "Please make a selection from the following list by entering  the correlating number."
-        new_drink.each_with_index do |j,i|             # "#{i +1}. #{j.name}"}
-            rows = []
-            rows << ["#{i +1}".colorize(:green), "#{j.name}".colorize(:light_blue)] 
-            
-            table = Terminal::Table.new :title => "Our list of drinks".colorize(:green), :headings => ['Enter'.colorize(:yellow), 'For Drink'.colorize(:yellow)], :rows => rows
-            puts table
-        
+        puts "Please make a selection from the following list by entering  the correlating number.".colorize(:yellow)
+        new_drink.each_with_index{|j,i| puts "#{i +1}. #{j.name}"}	         
+           
             
         input = gets.strip
         input = input.to_i
             if (1..new_drink.count) === input
                 input = new_drink[input-1].name  
-                new_recipe = Api.get_drink_by_name(input)       
+                new_recipe = Api.get_drink_by_name(input)  
+                     
                 self.recipe_display(new_recipe)
             elsif input == "q" || input == "Q"
                 user_quit
             else 
                 puts "Your input was invalid".colorize(:red)
-            end
+            
             self.display_of_drinks(new_drink)
         end
     end
@@ -176,4 +172,3 @@ class CLI
 
     
 end
-
