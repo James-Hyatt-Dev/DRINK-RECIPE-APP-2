@@ -3,4 +3,4 @@
 require_relative('../config/environment')
 
 
-CLI.new.welcome
+CLI.new.welcome_user
