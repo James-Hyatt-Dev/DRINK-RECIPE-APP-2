@@ -47,7 +47,7 @@ class CLI
         rows << ['9', 'Manhattan']
         rows << ['10', 'Moscow Mule']
         rows << ['11'.colorize(:red), 'Search by liquor'.colorize(:red)]
-        table = Terminal::Table.new :title => "Top Ten Drinks World Wide".colorize(:green), :headings => ['Enter'.colorize(:yellow), 'For Drink'.colorize(:yellow)], :rows => rows
+        table = Terminal::Table.new :title => "Top Ten Drinks World Wide".colorize(:green), :headings => ['Enter'.colorize(:yellow), 'For Drink'.colorize(:yellow)], :rows => rows, :style => {:width =>   45}
         puts table
         input = gets.strip
         self.user_selection_of_display_top_ten_drinks(input) 
@@ -75,10 +75,16 @@ class CLI
         puts "The recommended glass to use for your".colorize(:green) +  " #{new_recipe.name.colorize(:yellow)}" + ", is the".colorize(:green) + " #{new_recipe.glass.colorize(:yellow)}" + ".".colorize(:green)
         puts "The ingredients and their amounts to use are:".colorize(:green)
         puts ""
+        rows = []
         amounts_of_ingredients = new_recipe.ingredients.zip(new_recipe.amounts)
         amounts_of_ingredients.each do |ing, amt|
-            puts "#{ing}:".colorize(:yellow) + " #{amt}" 
+            rows << ["#{ing}", "#{amt}"]
         end
+        table = Terminal::Table.new :title => "#{new_recipe.name}".colorize(:green), :headings => ['Ingredients'.colorize(:yellow), 'Amount'.colorize(:yellow)], :rows => rows, :style => {:width =>   45}
+        puts table
+
+            #  puts "#{ing}:".colorize(:yellow) + " #{amt}" 
+        
         puts ""
         puts "Now the best part! Time to make your drink!".colorize(:green)
         puts ""
@@ -96,7 +102,7 @@ class CLI
         rows << ['5', 'Vodka']
         rows << ['6', 'Whisky']
         rows << ['7'.colorize(:red), 'Search by Top Ten Drinks'.colorize(:blue)]
-        table = Terminal::Table.new :title => "Top 6 Spirits World wide ".colorize(:green), :headings => ['Option'.colorize(:yellow), 'Spirit'.colorize(:yellow)], :rows => rows
+        table = Terminal::Table.new :title => "Top 6 Spirits World wide ".colorize(:green), :headings => ['Option'.colorize(:yellow), 'Spirit'.colorize(:yellow)], :rows => rows, :style => {:width =>   45}
         puts table
         input = gets.strip
         self.user_selection_from_display_of_liquors(input)
@@ -128,7 +134,7 @@ class CLI
         new_drink.each_with_index do |j,i| 
             rows << ["#{i +1}", "#{j.name}"]
         end
-        table = Terminal::Table.new :title => "Our list of drinks for".colorize(:green) + " #{new_drink[0].liquor}".colorize(:green), :headings => ['Enter'.colorize(:yellow), 'For Drink'.colorize(:yellow)], :rows => rows
+        table = Terminal::Table.new :title => "Our list of drinks for".colorize(:green) + " #{new_drink[0].liquor}".colorize(:green), :headings => ['Enter'.colorize(:yellow), 'For Drink'.colorize(:yellow)], :rows => rows, :style => {:width =>   45}
         
         puts table        
         input = gets.strip
