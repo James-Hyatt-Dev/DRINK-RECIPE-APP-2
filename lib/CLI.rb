@@ -103,7 +103,7 @@ class CLI
         rows << ['5', 'Vodka']
         rows << ['6', 'Whisky']
         rows << ['7'.colorize(:red), 'Search by Top Ten Drinks'.colorize(:red)]
-        table = Terminal::Table.new :title => "Top 6 Spirits World wide".colorize(:green), :headings => ['Option'.colorize(:yellow), 'Spirit'.colorize(:yellow)], :rows => rows
+        table = Terminal::Table.new :title => "Top 6 Spirits World wide ".colorize(:green), :headings => ['Option'.colorize(:yellow), 'Spirit'.colorize(:yellow)], :rows => rows
         puts table
         input = gets.strip
         self.user_input_liquor(input)
@@ -125,31 +125,36 @@ class CLI
         end
         display_of_drinks(new_drink)
     end
-
+#####
     def display_of_drinks(new_drink)
         puts ""                                                                                                
         puts "Thank you, here is the list of drinks from your selection.".colorize(:green)
         puts ""
         puts "Please make a selection from the following list by entering  the correlating number.".colorize(:yellow)
-        new_drink.each_with_index{|j,i| puts "#{i +1}. #{j.name}"}	         
-           
-            
+        rows = []
+        new_drink.each_with_index do |j,i| 
+            rows << ["#{i +1}", "#{j.name}"]
+        end
+        liquor_type = new_drink.each{|j| "#{j.name}"}
+        table = Terminal::Table.new :title => "Our list of drinks for".colorize(:green), :headings => ['Enter'.colorize(:yellow), 'For Drink'.colorize(:yellow)], :rows => rows
+        puts table
+        binding.pry
+        
         input = gets.strip
         input = input.to_i
             if (1..new_drink.count) === input
                 input = new_drink[input-1].name  
                 new_recipe = Api.get_drink_by_name(input)  
-                     
                 self.recipe_display(new_recipe)
             elsif input == "q" || input == "Q"
                 user_quit
             else 
                 puts "Your input was invalid".colorize(:red)
-            
+            end
             self.display_of_drinks(new_drink)
-        end
+        
     end
-
+####
     def main_menu
         puts ""
         puts "If you wish to look up another recipe, please enter 1".colorize(:green)
@@ -169,6 +174,5 @@ class CLI
     def exit_application
         abort("Thank you for using our Drink Recipe Application! Have A Great Day!")
     end
-
-    
 end
+
