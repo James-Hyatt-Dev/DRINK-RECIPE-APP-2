@@ -6,7 +6,7 @@ class Api
         url = "https://www.thecocktaildb.com/api/json/v2/#{@@apikey}/filter.php?i=#{liquor}"
         response = HTTParty.get(url)
         liquor_name_array = response["drinks"].each{|j| j.delete("strDrinkThumb")}
-     
+        liquor_name_array = response["drinks"].each{|j| j.delete("idDrink")}
         
         liquor_name_array.map do |j|
             drink_hash = {name: j["strDrink"], id: j["idDrink"], liquor: "#{liquor}"}

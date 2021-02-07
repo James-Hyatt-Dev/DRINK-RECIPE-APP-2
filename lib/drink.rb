@@ -1,6 +1,6 @@
 class Drink 
 
-    attr_accessor :name, :id, :liquor
+    attr_accessor :name, :liquor
 
     @@all_drinks = []
 
