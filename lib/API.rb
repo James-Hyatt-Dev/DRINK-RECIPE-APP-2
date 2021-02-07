@@ -5,7 +5,6 @@ class Api
     def self.get_drink_by_liquor(liquor)
         url = "https://www.thecocktaildb.com/api/json/v2/#{@@apikey}/filter.php?i=#{liquor}"
         response = HTTParty.get(url)
-
         liquor_name_array = response["drinks"].each{|j| j.delete("strDrinkThumb")}
      
         
@@ -29,6 +28,7 @@ class Api
         end.values.select do |j|
             j 
         end
+
         recipe_array = {
             glass: response["drinks"][0]["strGlass"], 
             instructions: response["drinks"][0]["strInstructions"], 

@@ -23,7 +23,11 @@ Summary
 Running the application
 
     There are a few 'gems' that are required to successfully run this application. 
-            'httparty'
+            require 'pry'
+            require 'httparty'
+            require 'terminal-table'
+            require 'colorize'
+
         
         The gems are included and required. `bundle install` to execute their installation
 

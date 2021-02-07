@@ -83,7 +83,6 @@ class CLI
         table = Terminal::Table.new :title => "#{new_recipe.name}".colorize(:green), :headings => ['Ingredients'.colorize(:yellow), 'Amount'.colorize(:yellow)], :rows => rows, :style => {:width =>   45}
         puts table
 
-            #  puts "#{ing}:".colorize(:yellow) + " #{amt}" 
         
         puts ""
         puts "Now the best part! Time to make your drink!".colorize(:green)
