@@ -1,10 +1,10 @@
 class CLI  
 
     def welcome_user
-        puts ""
-        puts "Welcome to our CLI Drink Recipe Application! We have over 600+ drinks, and 480+ ingrediates to share with you!".colorize(:light_blue)
-        puts ""
-        puts "If at any time you would like to exit the program, simply type in Q. ".colorize(:light_blue)
+        puts "
+        Welcome to our CLI Drink Recipe Application!     
+        We have over 600+ drinks, and 480+ ingrediates to share with you!    
+        If at any time you would like to exit the program, simply enter in Q.".black.on_green
         self.prompt_for_drink_or_liquor
       
     end
@@ -12,11 +12,11 @@ class CLI
   
 
     def prompt_for_drink_or_liquor
-        puts ""
-        puts "Please make a selection to get started.".colorize(:green)
-        puts ""
-        puts "1. Choose from the top 10 drinks World Wide".colorize(:yellow)
-        puts "2. Select a liquor to find drinks and their recipes.".colorize(:yellow)
+        puts "
+        Please make a selection to get started.".colorize(:green)
+        puts "
+        1. Choose from the top 10 drinks World Wide.colorize(:yellow)
+        2. Select a liquor to find drinks and their recipes.".colorize(:yellow)
         input = gets.strip
         self.input_from_prompt_for_drink_or_liquor(input)
     end
@@ -46,8 +46,8 @@ class CLI
         rows << ['8', 'Margarita']
         rows << ['9', 'Manhattan']
         rows << ['10', 'Moscow Mule']
-        rows << ['11'.colorize(:red), 'Search by liquor'.colorize(:red)]
-        table = Terminal::Table.new :title => "Top Ten Drinks World Wide".colorize(:green), :headings => ['Enter'.colorize(:yellow), 'For Drink'.colorize(:yellow)], :rows => rows, :style => {:width =>   45}
+        rows << ['11'.light_magenta, 'Search by liquor'.light_magenta]
+        table = Terminal::Table.new :title => "Top Ten Drinks World Wide".green, :headings => ['Enter'.colorize(:yellow), 'For Drink'.colorize(:yellow)], :rows => rows, :style => {:width =>   55}
         puts table
         input = gets.strip
         self.user_selection_of_display_top_ten_drinks(input) 
@@ -59,7 +59,7 @@ class CLI
         if input.to_i.between?(1,10) 
             new_recipe = Api.get_drink_by_name(input_value)
         elsif input == "q" || input == "Q" || input == "End" || input == "end"
-            exit_program
+            exit_application
         elsif input == "11" || input == "liquor" || input == "Liquor" || input == "start ovr"
              display_of_liquors
         else
@@ -70,22 +70,25 @@ class CLI
     end
 
     def recipe_display(new_recipe)
-        puts "All the wonderful information you requested for your".colorize(:green) + " #{new_recipe.name.colorize(:yellow)}" + " drink.".colorize(:green)
-        amounts_of_ingredients = new_recipe.ingredients.zip(new_recipe.amounts)
-        puts "The recommended glass to use for your".colorize(:green) +  " #{new_recipe.name.colorize(:yellow)}" + ", is the".colorize(:green) + " #{new_recipe.glass.colorize(:yellow)}" + ".".colorize(:green)
-        puts "The ingredients and their amounts to use are:".colorize(:green)
+        puts "
+        All the wonderful information you requested for your".colorize(:green) + " #{new_recipe.name.colorize(:yellow)}" + " drink.".colorize(:green)
+        puts "
+        The recommended glass to use for your".colorize(:green) + " #{new_recipe.name.colorize(:yellow)}," + " is the".colorize(:green) + " #{new_recipe.glass.colorize(:yellow)}" + ".".colorize(:green)
+        puts "
+        The ingredients and their amounts to use are:".colorize(:green)
         puts ""
+        
+        amounts_of_ingredients = new_recipe.ingredients.zip(new_recipe.amounts)
+
         rows = []
         amounts_of_ingredients = new_recipe.ingredients.zip(new_recipe.amounts)
         amounts_of_ingredients.each do |ing, amt|
             rows << ["#{ing}", "#{amt}"]
         end
-        table = Terminal::Table.new :title => "#{new_recipe.name}".colorize(:green), :headings => ['Ingredients'.colorize(:yellow), 'Amount'.colorize(:yellow)], :rows => rows, :style => {:width =>   45}
+        table = Terminal::Table.new :title => "#{new_recipe.name}".colorize(:green), :headings => ['Ingredients'.colorize(:yellow), 'Amount'.colorize(:yellow)], :rows => rows, :style => {:width =>   55}
         puts table
-
-        
-        puts ""
-        puts "Now the best part! Time to make your drink!".colorize(:green)
+        puts "
+        Now the best part! Time to make your drink!".green
         puts ""
         puts "#{new_recipe.instructions}".colorize(:yellow)
         self.cli_main_menu
@@ -100,8 +103,8 @@ class CLI
         rows << ['4', 'Tequila']
         rows << ['5', 'Vodka']
         rows << ['6', 'Whisky']
-        rows << ['7'.colorize(:red), 'Search by Top Ten Drinks'.colorize(:blue)]
-        table = Terminal::Table.new :title => "Top 6 Spirits World wide ".colorize(:green), :headings => ['Option'.colorize(:yellow), 'Spirit'.colorize(:yellow)], :rows => rows, :style => {:width =>   45}
+        rows << ['7'.colorize(:blue), 'Search by Top Ten Drinks'.colorize(:blue)]
+        table = Terminal::Table.new :title => "Top 6 Spirits World wide ".colorize(:green), :headings => ['Option'.colorize(:yellow), 'Spirit'.colorize(:yellow)], :rows => rows, :style => {:width =>   55}
         puts table
         input = gets.strip
         self.user_selection_from_display_of_liquors(input)
@@ -114,7 +117,7 @@ class CLI
         if input.to_i.between?(1,6) 
             new_drink = Api.get_drink_by_liquor(input_value2)
         elsif input == "q" || input == "Q"
-            self.user_quit
+            exit_application
         elsif input == "7" || input == "search" || input == "start over" || input == "top ten" || input == "Top Ten" || input == "Top ten"
             self.display_top_ten_drinks
         else
@@ -133,17 +136,18 @@ class CLI
         new_drink.each_with_index do |j,i| 
             rows << ["#{i +1}", "#{j.name}"]
         end
-        table = Terminal::Table.new :title => "Our list of drinks for".colorize(:green) + " #{new_drink[0].liquor}".colorize(:green), :headings => ['Enter'.colorize(:yellow), 'For Drink'.colorize(:yellow)], :rows => rows, :style => {:width =>   45}
+        table = Terminal::Table.new :title => "Our list of drinks for".colorize(:green) + " #{new_drink[0].liquor}".colorize(:green), :headings => ['Enter'.colorize(:yellow), 'For Drink'.colorize(:yellow)], :rows => rows, :style => {:width =>   55}
         
-        puts table        
+        puts table 
         input = gets.strip
-        input = input.to_i
-            if (1..new_drink.count) === input
+         input = input.to_i
+             if (1..new_drink.count) === input
                 input = new_drink[input-1].name  
                 new_recipe = Api.get_drink_by_name(input)  
                 self.recipe_display(new_recipe)
-            elsif input == "q" || input == "Q"
-                user_quit
+
+            elsif input == "q" || input == "Q" || input == 0
+                exit_application
             else 
                 puts "Your input was invalid".colorize(:red)
             end
@@ -153,9 +157,10 @@ class CLI
 ####
     def cli_main_menu
         puts ""
-        puts "If you wish to look up another recipe, please enter 1".colorize(:green)
-        puts ""
-        puts "If you wish to exit the application, please enter 2".colorize(:red)
+        puts "
+        If you wish to look up another recipe, please enter 1".green
+        puts "
+        If you wish to exit the application, please enter 2".white.on_red
         input = gets.strip
         if input == "1"
             self.prompt_for_drink_or_liquor
